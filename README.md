@@ -55,16 +55,15 @@ https://github.com/Xinyuan-LilyGO/T-QT/tree/main
 
 ## TinyIO Wiring
 
-Connect the CC1101 this way : 
-GDO0 to pin 33
-GDO2 to pin 38
-SCK to pin 36
-MISO (GOD1) to pin 37
-MOSI to pin 35
-CCSN to pin 34
-
-VCC to 3V3 (VDD3V)
-GND to GND
+|Connect the CC1101 this way : |
+|GDO0 to pin 33|
+|GDO2 to pin 38|
+|SCK to pin 36|
+|MISO (GOD1) to pin 37|
+|MOSI to pin 35|
+|CSN to pin 34|
+|VCC to 3V3 (VDD3V)|
+|GND to GND|
 
 ### Assembly with battery and DIY acrylic shell
 

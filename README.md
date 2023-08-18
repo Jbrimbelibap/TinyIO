@@ -41,17 +41,14 @@ It's mainly a proof-of-concept but already encompasses several very useful featu
 | 1 | Battery + switch | Optional 3.7v battery
 | 1 | Material for a case | Optional 
 
-https://github.com/Xinyuan-LilyGO/T-QT/tree/main
+* https://github.com/Xinyuan-LilyGO/T-QT/tree/main - For general T-QT pro documentation
+
 ![image](https://github.com/Jbrimbelibap/TinyIO/assets/90109439/459f0a0c-1522-4e57-85a3-8c3756f5c6f1)
 
 ![image](https://github.com/Jbrimbelibap/TinyIO/assets/90109439/6ae33815-1c96-4e7b-87bc-7fc4469e131b)
 
 
-* All the components can be easily found in the usual online stores such as *AliExpress* ([ESP32 TTGO T-Display](https://aliexpress.com/wholesale?SearchText=ttgo+t+display+esp32)) - [CC1101](https://aliexpress.com/wholesale?SearchText=cc1101)), *Amazon*, *eBay*, etc.
-* The breakout pcb and schematics files are under the docs/ directory: 
-[IO433 Schematic](docs/breakout.sch)
-[IO433 Board](docs/breakout.brd)
-
+* All the components can be easily found in the usual online stores such as *AliExpress* ([Lilygo t-QT pro](https://aliexpress.com/wholesale?SearchText=lilygo+t+qt+pro)) - [CC1101](https://aliexpress.com/wholesale?SearchText=cc1101)), the actual links i bought from : https://fr.aliexpress.com/item/1005005486373565.html & https://fr.aliexpress.com/item/1005005569255784.html
 
 ## TinyIO Wiring
 

@@ -70,8 +70,10 @@ Connect the CC1101 this way :
 
 ### Assembly with battery and DIY acrylic shell
 
+![TinyIO assembled 1](images/IMG_20230818_171104.jpg)
+![TinyIO assembled 2](images/IMG_20230818_171058.jpg)
 
-## How to flash IO433   
+## How to flash TinyIO   
 
 ### Using [Platformio](https://platformio.org/)
 

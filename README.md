@@ -1,26 +1,30 @@
 # Project IO433
 
 ```
- ___ ___  _ _ ________
-|_ _/ _ \| | |__ /__ /
- | | (_) |_  _|_ \|_ \
-|___\___/  |_|___/___/
+  _______ _             _____ ____  
+ |__   __(_)           |_   _/ __ \ 
+    | |   _ _ __  _   _  | || |  | |
+    | |  | | '_ \| | | | | || |  | |
+    | |  | | | | | |_| |_| || |__| |
+    |_|  |_|_| |_|\__, |_____\____/ 
+                   __/ |            
+                  |___/     
                        
 ```
 
 ## Description
 
-IO433 is an open-source ESP32 (TTGO T-Display) & CC1101 based 433Mhz sniffer. It is currently work in progress.
-It can sniff, store, replay, dump and monitor most 433Mhz (currently ASK-OOK only) signals.
+TinyIO is an open-source Lilygo T-QT pro (esp32s3) & CC1101 based SubGHZ sniffer. 
+It is based on the work of Kripthor with IO433 https://github.com/kripthor/io433
+It can copy, store, replay, and dump RF signals with ASK-OOK modulation below 1ghz.
 These include garage door openers, remote doorbells, sensors and similar devices.
 
-The core of this project aims to be its simplicity, reliability and versatility.
-With a couple of ICs and a by 'connecting some wires', or soldering a breakout board, one can start messing around with 433Mhz devices and decode their communications protocols.
+It keeps the core values of the IO433 project being its simplicity, reliability and versatility.
+With a couple of ICs and a by 'connecting some wires', or soldering a breakout board, one can start messing around with RF devices and copy their codes.
 It's mainly a proof-of-concept but already encompasses several very useful features.
 
 ```bash
 │  # The current dir is a platformIO project and can be imported straight from here.
-├── arduino  # an example arduino project that implements a remote for some ASK-OOK-PWM signals based on a FS1000A
 ├── docs     # docs and pictures
 ├── include  # project helper files 
 ├── lib    #some needed libraries with specific modifications for this project
@@ -32,14 +36,16 @@ It's mainly a proof-of-concept but already encompasses several very useful featu
 
 | Qty. | Description | Obs. |
 |------|------------------------|-----------------------------------------------------------------|
-| 1 | ESP32 TTGO T-Display | ESP32 controller with a 1.14" LCD and two buttons for navigation |
-| 1 | TI-CC1101 or E07-M1101D | CC1101 based modules for 433Mhz (and other frequencies) communications |
-| 1 | io433 PCB| Order a PCB or etch one or just grab some wires :) |
-| 1 | Battery | Optional 3.7v battery
+| 1 | Lilygo T-QT pro | ESP32S3 controller with a 0.85" LCD and two buttons for navigation |
+| 1 | CC1101 based module for sub GHz communications | I prefer the red one (the others tend to just not work)
+| 1 | Battery + switch | Optional 3.7v battery
+| 1 | Material for a case | Optional 
 
+https://github.com/Xinyuan-LilyGO/T-QT/tree/main
+![image](https://github.com/Jbrimbelibap/TinyIO/assets/90109439/459f0a0c-1522-4e57-85a3-8c3756f5c6f1)
 
-![IO433 Parts](docs/parts.png)
-![IO433 PCB](docs/io433-pcb-v02.png)
+![image](https://github.com/Jbrimbelibap/TinyIO/assets/90109439/6ae33815-1c96-4e7b-87bc-7fc4469e131b)
+
 
 * All the components can be easily found in the usual online stores such as *AliExpress* ([ESP32 TTGO T-Display](https://aliexpress.com/wholesale?SearchText=ttgo+t+display+esp32)) - [CC1101](https://aliexpress.com/wholesale?SearchText=cc1101)), *Amazon*, *eBay*, etc.
 * The breakout pcb and schematics files are under the docs/ directory: 
@@ -47,59 +53,20 @@ It's mainly a proof-of-concept but already encompasses several very useful featu
 [IO433 Board](docs/breakout.brd)
 
 
-## IO433 Wiring
+## TinyIO Wiring
 
-### Prototype photo and assembly suggestion
+Connect the CC1101 this way : 
+GDO0 to pin 33
+GDO2 to pin 38
+SCK to pin 36
+MISO (GOD1) to pin 37
+MOSI to pin 35
+CCSN to pin 34
 
-![IO433 PCB](docs/io433-prototype.png)
+VCC to 3V3 (VDD3V)
+GND to GND
 
-This is just a suggestion on how to wire the ESP32 and the CC1101. A perforated PCB can be used to make the prototype more sturdy. Or you can just order a pre-fabricated board, like the one bellow:
-
-![IO433 PCB](docs/io433_closeup.JPG)
-
-### IO433 Wiring
-
-![IO433 Wiring](docs/io433-wiring.png)
-![IO433 Wiring](docs/io433-wiring2.png)
-
-Details of the wiring between the ESP32 and TI-CC1101 (above) and the E07-M1101D (below). The pinout choosing is important. If changed, not only the code should change to reflect the new pinout, as one must make sure the corresponding ports on the ESP32 support the I/O operation mode that the code needs. 
-* **Important note**: the green wire connects to IO2 on the ESP32, regardless of what you see in some pictures.
-* **Important note 2**: You need to change the file ./include/CC1101utils.h to reflect which CC1101 model you are using.
-
-### IO433 PCB Schematics
-docs/breakout.sch
-![IO433 3D case with battery](docs/pcb1.PNG)
-docs/breakout.brd
-![IO433 3D case with battery](docs/pcb2.PNG)
-
-### Assembly with PCB
-
-Solder the CC1101 based module in the lower leftmost side of the pcb. The E07-M1101D will have 2x4 pins and the TI-CC1101 will have 2x5 pins. If you are using the E07-M1101D, connect the solderable jumper in the lower middle.  
-
-![IO433 3D case with battery](docs/pcbmount.jpg)
-
-Then just solder the ESP32 TTGO module on the PCB. Add a battery or just use the USB cable to power the module. Optionally print the 3D case for your CC1101 module. 
-I've made an Youtube video to show how to assemble it in less than half an hour: [IO433 Assembly on Youtube](https://www.youtube.com/watch?v=Nz-Mw6mhYjg)
-
-
-### Assembly with battery and 3D printed case, no PCB
-
-If you want, you can use the 3D printed case that supports a 902540 720mAh or even a 903048 1800mAh, 3.7V battery (should last for some days)
-The full material is listed bellow:
-
-![IO433 3D case with battery](docs/parts-battery.jpg)
-![IO433 3D case with battery](docs/parts-assembly.jpg)
-![IO433 3D case with battery](docs/parts-assembly2.jpg)
-![IO433 3D case with battery](docs/parts-case-white.jpg)
-
-### 3D case
-
-NO PCB version:
-Tinker/download it from [tinkercad](https://www.tinkercad.com/things/bPiFpUXC7pQ)
-or grab the STL from the [docs](docs/IO433.stl)
-
-PCB Version:
-Tinker/download, both TI-CC1101 and E07-M1101 versions, from  [tinkercad](https://www.tinkercad.com/things/0qDgP6hPqE1)
+### Assembly with battery and DIY acrylic shell
 
 
 ## How to flash IO433   
@@ -109,14 +76,14 @@ Tinker/download, both TI-CC1101 and E07-M1101 versions, from  [tinkercad](https:
 * Install Visual Studio
 * Install PlatformIO from the Extensions (restart)
 * Install the Espressif 32 platform from the PlatformIO Embedded tab (restart)
+* Check platformio.ini and chose the version of T-QT pro that you have (either 4mb flash 2mb psram or 8mb flash) 
 * Clone the repository
-* Change the file ./include/CC1101utils.h and uncomment your CC1101 version(either the TICC1101 or the E07M1101D)
-* Connect USB-C cable to TTGO
+* Connect USB-C cable to T-QT pro
 * Build and upload
 
 ## How to use it
 
-Plug the ESP32 to a battery or a to a USB-C cable. The current menu structure is the following:
+Plug the device to a battery or a to a USB-C cable. The current menu structure is the following:
 
 ```bash
 │ Main
@@ -131,36 +98,34 @@ Plug the ESP32 to a battery or a to a USB-C cable. The current menu structure is
 
 ## Button behaviour
 
-* UP and DOWN short press, moves between menu items
-* UP long press is moves back a level
-* DOWN long press enters current submenu or function
-* UP or DOWN double press moves back and forward from memory banks (to store/replay multiple signals) 
+* LEFT and RIGHT short press, moves between menu items
+* LEFT long press is moves back a level
+* RIGHT long press enters current submenu or function
+* RIGHT or LEFT double press moves back and forward from memory banks (to store/replay multiple signals) 
 
 ## Dependencies
 
 This project uses:
 
  * Button2 lib (which should auto-update on build via platformio.ini)
- * SmartRC-CC1101-Driver-Lib (on /lib, added minor changes for the ESP32 TDisplay)
- * TFT_eSPI (on /lib, added minor changes for the ESP32 TDisplay)
+ * SmartRC-CC1101-Driver-Lib (on /lib, kripthor added minor changes for the ESP32 TDisplay)
+ * TFT_eSPI (lib from https://github.com/Xinyuan-LilyGO/T-QT/tree/main)
 
 # Improvements
 
 There are many possibilities for improvements:
 
 * Code refactoring. Make SimpleMenu a proper lib.
-* Better SPIFFS management
-* Configuration menus for changing output data rates and formats
-* Configuration menus for CC1101 setup: frequencies, modulations, data rates and bandwidth
+* Move to other file system to make it possible to load a file containing a custom code (instead of having user custom codes hard-coded)
 * Implement other modulations besides ASK-OOK
-* Add upload data files from PC to be replayed
-* Add accept from serial and transmit features
+* Add data upload to files from PC to be replayed (currently can be hard coded and loaded from LOAD menu, better than nothing)
 * and so forth...
 
 Feel free to clone and play around, as well as to contribute and make a pull request.
 
 ## Kudos
 
+* Kripthor for most of the work https://github.com/kripthor/io433/tree/master
 * [LSatan](https://github.com/LSatan), for the SmartRC-CC1101-Driver-Lib
 * the [TFT_eSPI Library](https://github.com/Bodmer/TFT_eSPI)
 * Shameless README.md 'template' rip from [jpdias](https://github.com/jpdias)

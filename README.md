@@ -1,4 +1,4 @@
-# Project IO433
+# Project TinyIO
 
 ```
   _______ _             _____ ____  

@@ -116,6 +116,7 @@ This project uses:
 
 There are many possibilities for improvements:
 
+* Main one : find a way for the code to not freeze everytime the CC1101 is used at the same as the display. The original project had modified libraries for this I think. Right now a restart command is used after commands that cause freezes, it's not very noticeable for still the main issue.
 * Code refactoring. Make SimpleMenu a proper lib.
 * Move to other file system to make it possible to load a file containing a custom code (instead of having user custom codes hard-coded)
 * Implement other modulations besides ASK-OOK
